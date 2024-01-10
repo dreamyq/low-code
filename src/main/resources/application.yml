@@ -1,0 +1,134 @@
+## Configuration loading order by : Project Config > extension-configs > shared-configs
+## 配置加载顺序 : 项目DataID主配值 > 扩展配置 > 共享配置
+spring:
+  profiles:
+    active: ${profileActive}
+logback:
+  groupId: com.simbest
+  artifactId: ${logback.artifactId}
+server:
+  port: 8081
+  servlet:
+    context-path: /${logback.artifactId}
+---
+##测试环境
+spring:
+  config:
+    import:
+      - nacos:${logback.artifactId}-${profileActive}.properties
+    activate:
+      on-profile: uat
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: ${logback.artifactId}
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${spring.cloud.nacos.config.server-addr}
+        username: ${spring.cloud.nacos.config.username}
+        password: ${spring.cloud.nacos.config.password}
+        group: DEFAULT_GROUP
+        namespace: 2e74d7ec-48cc-4ac5-bb2d-b271dc9f7b59
+      config:
+        server-addr: ${spring.cloud.nacos.config.server-addr}
+        username: ${spring.cloud.nacos.config.username}
+        password: ${spring.cloud.nacos.config.password}
+        group: DEFAULT_GROUP
+        namespace: 2e74d7ec-48cc-4ac5-bb2d-b271dc9f7b59
+        file-extension: properties
+        refresh-enabled: true
+
+        ##extension-configs[0]:
+        ##  data-id: ${logback.artifactId}-custom-uat.properties
+        ##  group: DEFAULT_GROUP
+        ##  refresh: true
+
+        shared-configs[0]:
+          data-id: commons-cloud.properties
+          group: DEFAULT_GROUP
+          refresh: true
+        shared-configs[1]:
+          data-id: logback-elk.properties
+          group: DEFAULT_GROUP
+          refresh: true
+---
+##克隆环境
+spring:
+  config:
+    import:
+      - nacos:${logback.artifactId}-${profileActive}.properties
+    activate:
+      on-profile: clone
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: ${logback.artifactId}
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${spring.cloud.nacos.config.server-addr}
+        username: ${spring.cloud.nacos.config.username}
+        password: ${spring.cloud.nacos.config.password}
+        group: DEFAULT_GROUP
+        namespace: 6c465ad4-49cb-4bc7-8be4-232faa90efe2
+      config:
+        server-addr: ${spring.cloud.nacos.config.server-addr}
+        username: ${spring.cloud.nacos.config.username}
+        password: ${spring.cloud.nacos.config.password}
+        group: DEFAULT_GROUP
+        namespace: 6c465ad4-49cb-4bc7-8be4-232faa90efe2
+        file-extension: properties
+        refresh-enabled: true
+        ##extension-configs[0]:
+        ##  data-id: ${logback.artifactId}-custom-clone.properties
+        ##  group: DEFAULT_GROUP
+        ##  refresh: true
+        shared-configs[0]:
+          data-id: commons-cloud.properties
+          group: DEFAULT_GROUP
+          refresh: true
+        shared-configs[1]:
+          data-id: logback-elk.properties
+          group: DEFAULT_GROUP
+          refresh: true
+---
+##生产环境
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  config:
+    import:
+      - nacos:${logback.artifactId}-${profileActive}.properties
+    activate:
+      on-profile: prd
+  application:
+    name: ${logback.artifactId}
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${spring.cloud.nacos.config.server-addr}
+        username: ${spring.cloud.nacos.config.username}
+        password: ${spring.cloud.nacos.config.password}
+        group: DEFAULT_GROUP
+        namespace: 85ec0673-9f07-41f7-9cd0-7f67836a115c
+      config:
+        server-addr: ${spring.cloud.nacos.config.server-addr}
+        username: ${spring.cloud.nacos.config.username}
+        password: ${spring.cloud.nacos.config.password}
+        group: DEFAULT_GROUP
+        namespace: 85ec0673-9f07-41f7-9cd0-7f67836a115c
+        file-extension: properties
+        refresh-enabled: true
+        ##extension-configs[0]:
+        ##  data-id: ${logback.artifactId}-custom-prd.properties
+        ##  group: DEFAULT_GROUP
+        ##  refresh: true
+        shared-configs[0]:
+          data-id: commons-cloud.properties
+          group: DEFAULT_GROUP
+          refresh: true
+        shared-configs[1]:
+          data-id: logback-elk.properties
+          group: DEFAULT_GROUP
+          refresh: true
