@@ -9,4 +9,12 @@ import com.simbest.metadata.model.Inst;
  **/
 public interface InstService {
     Inst initInst(String  businessType,String dnaCode);
+
+    Inst saveInst(Inst inst);
+
+    Inst getInst(String businessType,String dnaCode);
+
+    void deleteInst(String businessType,String dnaCode);
+
+
 }

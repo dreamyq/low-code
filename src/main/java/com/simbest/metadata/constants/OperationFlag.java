@@ -5,5 +5,8 @@ package com.simbest.metadata.constants;
  */
 public class OperationFlag {
 
-    public static final String OPERATION_FLAG_NEW = "OPERATION_FLAG_NEW";
+    public final static String OPERATION_FLAG_NEW = "new";
+    public final static String OPERATION_FLAG_DELETE = "delete";
+    public final static String OPERATION_FLAG_UPDATE = "update";
+    public final static String OPERATION_FLAG_UNCHANGED = "unchanged";
 }

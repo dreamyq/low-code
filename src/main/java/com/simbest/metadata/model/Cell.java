@@ -33,16 +33,52 @@ public class Cell {
 
     private Inst owner;
 
-    public void addChildInst(String dnaName,String dnaCode,Inst inst){
 
-    }
-
-    public void setVaByName(String code,String name){
+    public void setVaByName(String name, String value) {
         Va va = new Va();
-        va.setCode(code);
+        va.setCode(name);
         va.setName(name);
-//        va.setDataType();
-        vas.put(code,va);
+        va.setDataType("string");
+        va.setValue(value);
+        vas.put(name, va);
     }
+
+    public void addChildInst(Inst accountInst) {
+        children.put(accountInst.getDnaName(), accountInst);
+    }
+
+
+    public void addChildInst(String dnaName, String dnaCode2, Inst accountInst) {
+        children.put(dnaName, accountInst);
+    }
+
+    public Inst getChildInst(String childName) {
+        return children.get(childName);
+    }
+
+    public String getRawStringByName(String name) {
+        Va va = vas.get(name);
+        if (va != null) {
+            return va.getRawString();
+        }
+        return null;
+    }
+
+    public Boolean getRawBoolByName(String name) {
+        Va va = vas.get(name);
+        if (va == null) {
+            return null;
+        }
+        return va.getRawBoolean();
+    }
+
+    public Va getVaByName(String vdName) {
+        return vas.get(vdName);
+    }
+
+    public Object getValue(String name) {
+        return null;
+    }
+
 
 }

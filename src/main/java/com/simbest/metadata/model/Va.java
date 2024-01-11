@@ -26,4 +26,12 @@ public class Va {
      * 用于记录属性值，该值由dataType决定，例如dataType为String，则value为String类型
      */
     private Object value;
+
+    public String getRawString() {
+        return value.toString();
+    }
+
+    public Boolean getRawBoolean() {
+        return (Boolean) value;
+    }
 }
